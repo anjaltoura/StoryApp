@@ -59,17 +59,6 @@ public class storyScript : MonoBehaviour
 
     }
 
-    //public void onLastBtnClick()
-    //{
-    //    lastText.gameObject.SetActive(true);
-    //   // lastText.text = displayLastText;
-    //    mainText.gameObject.SetActive(false);
-    //    image.gameObject.SetActive(false);
-    //    this.transform.parent.gameObject.SetActive(false);
-    //    nextButton.SetActive(true);
-    //  //  prevButton.SetActive(true);
-    //}
-
     void Start()
     {
         

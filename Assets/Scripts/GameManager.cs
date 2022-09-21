@@ -14,14 +14,17 @@ public class GameManager : Singleton <GameManager>
     public Sprite defaultImage;
     public GameObject usernameInputPanel;
     public GameObject usernameDisplayPanel;
+    public GameObject animationPanel;
     public Text usernameDisplayText;
     public int pageNumber;
     public int currentPageNumber, nextPage;
-    //public int pageNumber;
-    public GameObject content; 
+    public GameObject content;
+    public InputField userInp;
+    public string inpData = "";
+   // public Animator animation;
 
 
-   
+
     public void onCloseBtnClick()
     {
         Application.Quit();
@@ -66,11 +69,17 @@ public class GameManager : Singleton <GameManager>
     public void onStartStoryButtonClick()
     {
         usernameDisplayPanel.SetActive(false);
-        mainScreen.SetActive(true);
-       // onRestartBtnClick();
-
+        StartCoroutine(ShowAnimationPanel());
     }
 
+    IEnumerator ShowAnimationPanel()
+    {
+        animationPanel.SetActive(true);
+        yield return new WaitForSeconds(4);
+        animationPanel.SetActive(false);
+        mainScreen.SetActive(true);
+
+    }
     public void onNextButtonClick()
     {
         Debug.Log("current page number " + currentPageNumber);
@@ -82,7 +91,14 @@ public class GameManager : Singleton <GameManager>
 
     }
 
-
+    public void onSubmitBtnClick_savePlayer()
+    {
+        //animation.SetTrigger("onAnimationClick");
+        inpData = userInp.text;
+        userInp.text = "";
+        // Debug.Log(inpData);
+        PlayerPrefs.SetString("username", inpData);
+    }
     public void onUsernameSubmitClick()
     {
         usernameInputPanel.SetActive(false);
@@ -95,10 +111,11 @@ public class GameManager : Singleton <GameManager>
     {
         foreach( Transform button in content.transform)
         {
-            button.GetComponent<storyScript>().highlighter.SetActive(false);
+            button.GetComponent<storyScript>().highlighter.SetActive(false);                                                                                                                                                                                                                                                                                                                                                                                                      
         }
     }
-    // Update is called once per frame
+    
+
     void Update()
     {
         
